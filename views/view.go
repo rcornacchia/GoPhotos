@@ -10,6 +10,7 @@ func NewView(files ...string) *View {
 	if err != nil {
 		panic(err)
 	}
+
 	return &View{
 		Template: t,
 	}
