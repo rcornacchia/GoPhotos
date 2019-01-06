@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/schema"
+
 	"lenslocked.com/views"
 )
 
@@ -30,8 +32,23 @@ func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// SignupForm is a struct for saving the signup POST values
+type SignupForm struct {
+	Email    string `schema:"email"`
+	Password string `schema:"password"`
+}
+
 // Create is used to process the signup form
 // POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "This is a temporary response.")
+	if err := r.ParseForm(); err != nil {
+		panic(err)
+	}
+
+	dec := schema.NewDecoder()
+	var form SignupForm
+	if err := dec.Decode(&form, r.PostForm); err != nil {
+		panic(err)
+	}
+	fmt.Fprintln(w, form)
 }
