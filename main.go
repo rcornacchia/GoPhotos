@@ -12,8 +12,8 @@ func main() {
 	usersC := controllers.NewUsers()
 
 	r := mux.NewRouter()
-	r.Handle("/", staticC.HomeView)
-	r.Handle("/contact", staticC.ContactView).Methods("GET")
+	r.Handle("/", staticC.Home)
+	r.Handle("/contact", staticC.Contact).Methods("GET")
 	r.HandleFunc("/signup", usersC.New).Methods("GET")
 	r.HandleFunc("/signup", usersC.Create).Methods("POST")
 	http.ListenAndServe(":3000", r)
