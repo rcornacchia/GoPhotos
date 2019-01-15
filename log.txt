@@ -1,0 +1,22 @@
+1.13.19
+
+Setting up Postgres
+
+host: localhost
+port: 5432
+user: Postgres
+password: <none>
+dbname: usegolang_dev
+
+CREATE TABLE USERS (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  email TEXT NOT NULL
+);
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  amount INT,
+  description TEXT
+);
